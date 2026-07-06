@@ -1,0 +1,44 @@
+import datetime
+
+print("=" * 50)
+print("      Welcome to AI Rule-Based Chatbot")
+print("Type 'bye' to exit.")
+print("=" * 50)
+
+while True:
+    user = input("\nYou: ").lower().strip()
+
+    if user in ["hello", "hi", "hey"]:
+        print("Bot: Hello! How can I help you?")
+
+    elif "name" in user:
+        print("Bot: My name is AI Chatbot.")
+
+    elif "college" in user:
+        print("Bot: I was created as an AI internship project.")
+
+    elif "python" in user:
+        print("Bot: Python is a popular programming language for AI and Machine Learning.")
+
+    elif "ai" in user:
+        print("Bot: Artificial Intelligence enables machines to simulate human intelligence.")
+
+    elif "date" in user:
+        print("Bot:", datetime.date.today())
+
+    elif "time" in user:
+        current = datetime.datetime.now().strftime("%H:%M:%S")
+        print("Bot:", current)
+
+    elif "help" in user:
+        print("Bot: You can ask me about AI, Python, my name, date, or time.")
+
+    elif user in ["thanks", "thank you"]:
+        print("Bot: You're welcome!")
+
+    elif user == "bye":
+        print("Bot: Goodbye! Have a nice day.")
+        break
+
+    else:
+        print("Bot: Sorry, I don't understand that question.")
