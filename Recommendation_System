@@ -1,37 +1,26 @@
-import pandas as pd
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
+#  Movie Recommendation System
 
-# Load dataset
-movies = pd.read_csv("movies.csv")
+movies = {
+    "Avengers": ["Iron Man", "Captain America", "Spider-Man", "Thor", "Hulk"],
+    "Iron Man": ["Avengers", "Spider-Man", "Captain America", "Thor", "Black Panther"],
+    "Spider-Man": ["Avengers", "Iron Man", "Batman", "Superman", "Captain America"],
+    "Batman": ["Superman", "Spider-Man", "Joker", "Wonder Woman", "Flash"],
+    "Superman": ["Batman", "Wonder Woman", "Flash", "Aquaman", "Spider-Man"],
+    "Titanic": ["The Notebook", "Avatar", "Frozen", "La La Land", "Up"],
+    "Frozen": ["Moana", "Toy Story", "Finding Nemo", "Tangled", "Up"]
+}
 
-# Convert genres into vectors
-cv = CountVectorizer()
-matrix = cv.fit_transform(movies["genre"])
+print("===== Movie Recommendation System =====")
 
-# Calculate similarity
-similarity = cosine_similarity(matrix)
+print("\nAvailable Movies:")
+for movie in movies:
+    print("-", movie)
 
-def recommend(movie_name):
-    movie_name = movie_name.lower()
+choice = input("\nEnter a movie name: ")
 
-    if movie_name not in movies["title"].str.lower().values:
-        print("Movie not found!")
-        return
-
-    index = movies[movies["title"].str.lower() == movie_name].index[0]
-
-    distances = list(enumerate(similarity[index]))
-    distances = sorted(distances, key=lambda x: x[1], reverse=True)
-
-    print(f"\nMovies similar to '{movies.iloc[index]['title']}':\n")
-
-    count = 0
-    for i in distances[1:]:
-        print(movies.iloc[i[0]]["title"])
-        count += 1
-        if count == 5:
-            break
-
-movie = input("Enter movie name: ")
-recommend(movie)
+if choice in movies:
+    print("\nRecommended Movies:")
+    for movie in movies[choice]:
+        print("-", movie)
+else:
+    print("Movie not found!")
